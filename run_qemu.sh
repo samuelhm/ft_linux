@@ -18,9 +18,8 @@ qemu-system-x86_64 \
   -object iothread,id=${IO_THREAD} \
   -device virtio-blk-pci,drive=${DISK_ID},iothread=${IO_THREAD},num-queues=12 \
   -drive if=none,id=${DISK_ID},file=ft_linux_disk.img,format=raw,cache=none,aio=io_uring \
-  -cdrom archlinux-2026.05.01-x86_64.iso \
   -boot order=d \
-  -nic user,model=virtio-net-pci \
+  -nic user,model=virtio-net-pci,hostfwd=tcp::2222-:22 \
   -vga virtio \
   -display gtk \
   -device virtio-tablet \
