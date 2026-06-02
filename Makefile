@@ -15,7 +15,7 @@ mount:
 		exit 1; \
 	fi
 	@echo "Checking if QEMU is running..."
-	@if pgrep -f "qemu-system.*$(DISK_IMG)" >/dev/null 2>&1; then \
+	@if pgrep -f "[q]emu-system.*$(DISK_IMG)" >/dev/null 2>&1; then \
 		echo "Error: QEMU VM is still running. Shut it down first."; \
 		exit 1; \
 	fi
@@ -41,9 +41,9 @@ umount:
 
 status:
 	@echo "=== VM Status ==="
-	@if pgrep -f "qemu-system.*$(DISK_IMG)" >/dev/null 2>&1; then \
+	@if pgrep -f "[q]emu-system.*$(DISK_IMG)" >/dev/null 2>&1; then \
 		echo "QEMU VM: RUNNING"; \
-		pgrep -af "qemu-system.*$(DISK_IMG)"; \
+		pgrep -af "[q]emu-system.*$(DISK_IMG)"; \
 	else \
 		echo "QEMU VM: STOPPED"; \
 	fi
