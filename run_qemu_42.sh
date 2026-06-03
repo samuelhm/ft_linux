@@ -4,7 +4,7 @@
 
 IO_THREAD="iothread1"
 DISK_ID="root"
-DISK_PATH="/sgoinfre/students/shurtado/ft_linux_disk.img"
+DISK_PATH="/sgoinfre/students/shurtado/ft_linux_disk.qcow2"
 
 qemu-system-x86_64 \
   -name "ft_linux (shurtado)" \
@@ -17,7 +17,7 @@ qemu-system-x86_64 \
   -global kvm-pit.lost_tick_policy=discard \
   -object iothread,id=${IO_THREAD} \
   -device virtio-blk-pci,drive=${DISK_ID},iothread=${IO_THREAD},num-queues=4 \
-  -drive if=none,id=${DISK_ID},file="${DISK_PATH}",format=raw,cache=writeback,aio=threads \
+  -drive if=none,id=${DISK_ID},file=${DISK_PATH},format=qcow2,cache=writeback,aio=threads \
   -boot order=d \
   -nic user,model=virtio-net-pci,hostfwd=tcp::2222-:22 \
   -vga virtio \

@@ -1,4 +1,4 @@
-DISK_IMG := ft_linux_disk.img
+DISK_IMG := ft_linux_disk.qcow2
 MOUNT_POINT := disk_mount
 QEMU_SCRIPT := run_qemu.sh
 QEMU_42_SCRIPT := run_qemu_42.sh
@@ -10,6 +10,11 @@ run:
 
 42run:
 	@bash $(QEMU_42_SCRIPT)
+
+42decompress:
+	@echo "Decompressing ft_linux_disk.qcow2.gz..."
+	tar -xvOf /sgoinfre/students/shurtado/ft_linux_disk_final.qcow2.tar.xz | cp --sparse=always /dev/stdin /sgoinfre/students/shurtado/ft_linux_disk.qcow2
+	@echo "Decompression complete. You can now run 'make 42run' to start the VM with the decompressed image."
 
 mount:
 	@echo "Checking if disk image is in use..."
