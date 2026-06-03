@@ -10,7 +10,6 @@ qemu-system-x86_64 \
   -enable-kvm \
   -cpu host,topoext=on \
   -smp 12,cores=6,threads=2,sockets=1 \
-  -k es \
   -m 16G \
   -machine type=q35,accel=kvm,hpet=off \
   -rtc base=utc,clock=host \
@@ -21,7 +20,7 @@ qemu-system-x86_64 \
   -boot order=d \
   -nic user,model=virtio-net-pci,hostfwd=tcp::2222-:22 \
   -vga virtio \
-  -display gtk \
+  -display gtk,zoom-to-fit=off \
   -device virtio-tablet \
   -audiodev none,id=audionone \
   "$@"

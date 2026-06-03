@@ -20,7 +20,7 @@ mount:
 		exit 1; \
 	fi
 	@echo "Checking if already mounted..."
-	@if mountpoint -q $(MOUNT_POINT); then \
+	@if sudo mountpoint -q $(MOUNT_POINT) 2>/dev/null; then \
 		echo "Error: $(MOUNT_POINT) is already mounted."; \
 		exit 1; \
 	fi
@@ -30,8 +30,7 @@ mount:
 	@echo "Mounted successfully."
 
 umount:
-	@echo "Checking if $(MOUNT_POINT) is mounted..."
-	@if mountpoint -q $(MOUNT_POINT); then \
+	@if sudo mountpoint -q $(MOUNT_POINT) 2>/dev/null; then \
 		echo "Unmounting $(MOUNT_POINT)..."; \
 		sudo guestunmount $(MOUNT_POINT); \
 		echo "Unmounted successfully."; \
@@ -57,7 +56,7 @@ status:
 	fi
 	@echo ""
 	@echo "=== Mount Status ==="
-	@if mountpoint -q $(MOUNT_POINT); then \
+	@if sudo mountpoint -q $(MOUNT_POINT) 2>/dev/null; then \
 		echo "$(MOUNT_POINT): MOUNTED"; \
 	else \
 		echo "$(MOUNT_POINT): NOT MOUNTED"; \
