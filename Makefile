@@ -21,6 +21,21 @@ run:
 	@qemu-img snapshot -a "final" /sgoinfre/students/shurtado/ft_linux_disk.qcow2
 	@echo "Disk image restored successfully."
 
+42compress:
+	@echo "Compressing disk image..."
+	@tar -czf ft_linux_disk_compressed.qcow2.tar.gz /sgoinfre/students/shurtado/ft_linux_disk.qcow2
+	@echo "Compression completed successfully as ft_linux_disk_compressed.qcow2."
+
+42decompress:
+	@echo "Decompressing disk image..."
+	@tar -xzf ft_linux_disk_compressed.qcow2.tar.gz -C /sgoinfre/students/shurtado/
+	@echo "Decompression completed successfully."
+
+42shasumcheck:
+	@echo "Calculating SHA256 checksum of disk image..."
+	@shasum -c sum.sha1
+	@echo "SHA256 checksum calculated successfully."
+
 mount:
 	@echo "Checking if disk image is in use..."
 	@if lsof $(DISK_IMG) >/dev/null 2>&1; then \
