@@ -6,7 +6,35 @@ MOUNT_POINT := disk_mount
 QEMU_SCRIPT := run_qemu.sh
 QEMU_42_SCRIPT := run_qemu_42.sh
 
-.PHONY: run 42run 42backup 42restore 42compress 42decompress 42shasumcheck mount umount status
+.PHONY: all help run 42run 42backup 42restore 42compress 42decompress 42shasumcheck mount umount status
+
+all: help
+
+help:
+	@echo "====================================================================="
+	@echo "                       FT_LINUX MAKEFILE HELP                        "
+	@echo "====================================================================="
+	@echo "Uso: make [comando]"
+	@echo ""
+	@echo "Comandos disponibles:"
+	@echo "  help            - Muestra este menú de ayuda."
+	@echo ""
+	@echo "--- Arranque ---"
+	@echo "  run             - Inicia la máquina virtual estándar ($(QEMU_SCRIPT))."
+	@echo "  42run           - Inicia la máquina virtual para evaluación ($(QEMU_42_SCRIPT))."
+	@echo ""
+	@echo "--- Gestión de Evaluaciones (Snapshots y Compresión) ---"
+	@echo "  42backup        - Crea un snapshot interno ('final') en el disco qcow2."
+	@echo "  42restore       - Restaura el disco al estado del snapshot 'final'."
+	@echo "  42compress      - Comprime el disco en $(TAR_FILE) dentro de sgoinfre."
+	@echo "  42decompress    - Descomprime el disco desde el archivo .tar.gz."
+	@echo "  42shasumcheck   - Verifica que la firma SHA-1 del .tar.gz sea correcta."
+	@echo ""
+	@echo "--- Herramientas del Sistema ---"
+	@echo "  mount           - Monta la partición 3 (root) del disco en $(MOUNT_POINT)."
+	@echo "  umount          - Desmonta la partición del disco de forma segura."
+	@echo "  status          - Muestra si la VM está encendida y si el disco está en uso."
+	@echo "====================================================================="
 
 run:
 	@bash $(QEMU_SCRIPT)
