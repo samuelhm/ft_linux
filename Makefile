@@ -11,10 +11,15 @@ run:
 42run:
 	@bash $(QEMU_42_SCRIPT)
 
-42decompress:
-	@echo "Decompressing ft_linux_disk.qcow2.gz..."
-	tar -xvOf /sgoinfre/students/shurtado/ft_linux_disk_final.qcow2.tar.xz | cp --sparse=always /dev/stdin /sgoinfre/students/shurtado/ft_linux_disk.qcow2
-	@echo "Decompression complete. You can now run 'make 42run' to start the VM with the decompressed image."
+42backup:
+	@echo "Creating backup of disk image..."
+	@qemu-img snapshot -c "final" /sgoinfre/students/shurtado/ft_linux_disk.qcow2
+	@echo "Backup created successfully as ft_linux_disk_backup.qcow2."
+
+42restore:
+	@echo "Restoring disk image from backup..."
+	@qemu-img snapshot -a "final" /sgoinfre/students/shurtado/ft_linux_disk.qcow2
+	@echo "Disk image restored successfully."
 
 mount:
 	@echo "Checking if disk image is in use..."
