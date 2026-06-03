@@ -1,11 +1,15 @@
 DISK_IMG := ft_linux_disk.img
 MOUNT_POINT := disk_mount
 QEMU_SCRIPT := run_qemu.sh
+QEMU_42_SCRIPT := run_qemu_42.sh
 
 .PHONY: run mount umount status
 
 run:
 	@bash $(QEMU_SCRIPT)
+
+42run:
+	@bash $(QEMU_42_SCRIPT)
 
 mount:
 	@echo "Checking if disk image is in use..."
